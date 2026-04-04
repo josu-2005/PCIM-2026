@@ -1,0 +1,290 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.game {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-image: url("img/cancha.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* FILTRO VERDE - AHORA NO AFECTA LA CÁMARA */
+body.game::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 97, 20, 0.55);
+    z-index: -1;
+    pointer-events: none; /* ← NUEVO: Evita que interfiera con la cámara */
+}
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+.top-banner {
+    text-align: center;
+    padding: 14px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 35px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, .7);
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: center;
+    padding: 8px 16px;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 10px 18px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: white;
+    background: rgba(0, 0, 0, .55);
+    border: 2px solid #ff7a00;
+    text-decoration: none;
+    transition: .15s;
+}
+
+.back-btn:hover {
+    background: #ff7a00;
+    color: black;
+    transform: scale(1.08);
+    box-shadow: 0 0 10px #ff7a00, 0 0 25px rgba(255, 122, 0, .8);
+}
+
+.instrucciones {
+    font-size: 20px;
+    line-height: 1.5;
+    opacity: .9;
+    margin: 10px 16px;
+    padding: 12px;
+    border: 4px solid rgba(224, 83, 18, 0.904);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, .35);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== ÁREA DE CÁMARA ===== */
+.camara-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    position: relative;
+    z-index: 5;
+}
+
+.camara-placeholder {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 9/16;
+    border: 3px dashed rgba(255, 255, 255, .4);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, .35);
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+/* ===== ESCENA AR - SIN FILTRO VERDE ===== */
+#arScene {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    /* AISLAR del filtro verde */
+    filter: none !important;
+    background: transparent !important;
+}
+
+.a-scene {
+    width: 100% !important;
+    height: 100% !important;
+    filter: none !important;
+    background: transparent !important;
+}
+
+.a-scene canvas {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    filter: none !important;
+    background: transparent !important;
+}
+
+/* Ocultar elementos molestos */
+.a-enter-vr, .a-enter-ar, .rs-base, .a-loader-title {
+    display: none !important;
+}
+
+/* ===== NUEVO: FORZAR QUE LA CÁMARA NO TENGA FILTROS ===== */
+video, canvas, .a-canvas, .a-scene * {
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: transparent !important;
+}
+
+/* ===== RESULTADO DEL SCANNER ===== */
+.resultado-scanner {
+    text-align: center;
+    margin: 10px 16px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(0,0,0,.45);
+    border: 3px solid #ff7a00;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(2px);
+    color: white;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 20;
+}
+
+.resultado-scanner.success {
+    background: rgba(0, 255, 0, 0.15);
+    box-shadow: 0 0 20px rgba(255, 122, 0, 0.3);
+    border-color: #00ff00;
+}
+
+.resultado-scanner p {
+    margin: 0;
+    animation: scan 1.5s infinite;
+}
+
+.resultado-scanner.success p {
+    animation: none;
+}
+
+@keyframes scan {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+/* ===== PANEL DE CONTROLES ===== */
+.panel-controles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 12px;
+    background: rgba(0, 0, 0, .55);
+    backdrop-filter: blur(4px);
+    position: relative;
+    z-index: 25;
+}
+
+.ctrl {
+    padding: 14px 6px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: white;
+    background: rgba(0, 0, 0, .55);
+    border: 2px solid #ff7a00;
+    border-radius: 10px;
+    transition: .25s;
+    cursor: pointer;
+}
+
+.ctrl:hover {
+    background: #ff7a00;
+    color: black;
+    transform: scale(1.08);
+    box-shadow: 0 0 10px #ff7a00, 0 0 25px rgba(255, 122, 0, .8);
+}
+
+.ctrl.camara-activa {
+    background: #ff7a00;
+    color: black;
+    border-color: white;
+}
+
+/* ===== INFO OVERLAY ===== */
+.info-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    backdrop-filter: blur(3px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s;
+    z-index: 100;
+}
+
+.info-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.info-panel {
+    width: min(420px, 92%);
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.marcador-ejemplo {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.marcador-ejemplo img {
+    max-width: 200px;
+    border: 2px solid #ff7a00;
+    border-radius: 10px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .panel-controles {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+    }
+    
+    .ctrl {
+        font-size: 14px;
+        padding: 12px 2px;
+    }
+}
+
+/* ===== ASEGURAR QUE EL FILTRO VERDE NO TOQUE LA CÁMARA ===== */
+.camara-placeholder * {
+    position: relative;
+    z-index: 30;
+    isolation: isolate; /* Aísla del contexto del filtro */
+}
+
+#btnCambiar {
+    transition: opacity 0.3s ease, transform 0.25s;
+}

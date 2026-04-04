@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Go For The Goal! - RA</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="ra.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+</head>
+<body class="game">
+    <main class="app">
+        <header class="top-banner">
+            <p>⚽ GO FOR THE GOAL! ⚽</p>
+        </header>
+
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn">⬅️ REGRESAR</a>
+        </nav>
+
+        <section class="instrucciones">
+            <p>
+                📱 Enfoca el escudo de una selección<br>
+                🔍 El modelo 3D aparecerá automáticamente
+            </p>
+        </section>
+
+        <section class="camara-area">
+            <div class="camara-placeholder" id="camaraPlaceholder">
+                <a-scene 
+                    id="arScene"
+                    mindar-image="imageTargetSrc: ./assets/mundial.mind.txt; autoStart: true; uiScanning: no; uiLoading: no;"
+                    embedded
+                    vr-mode-ui="enabled: false"
+                    color-space="sRGB"
+                    style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;">
+
+                    <a-assets>
+                        <a-asset-item id="modeloAlemania" src="./modelos/Balonalm.glb"></a-asset-item>
+                        <a-asset-item id="modeloBrasil" src="./modelos/Balonbsl.glb"></a-asset-item>
+                        <a-asset-item id="modeloArgentina" src="./modelos/Balonarg.glb"></a-asset-item>
+                        <a-asset-item id="modeloMexico" src="./modelos/Balonmx.glb"></a-asset-item>
+                        <a-asset-item id="modeloUSA" src="./modelos/Baloneu.glb"></a-asset-item>
+                        <a-asset-item id="modeloCanada" src="./modelos/Baloncnda.glb"></a-asset-item>
+                        <a-asset-item id="modeloColombia" src="./modelos/Ballie.glb"></a-asset-item>
+                        <a-asset-item id="modeloItalia" src="./modelos/Balonita.glb"></a-asset-item>
+                        <a-asset-item id="modeloUruguay" src="./modelos/Balonuru.glb"></a-asset-item>
+                        <a-asset-item id="modeloFrancia" src="./modelos/Balonfran.glb"></a-asset-item>
+                        <a-asset-item id="modeloEspana" src="./modelos/Balonesp.glb"></a-asset-item>
+                    </a-assets>
+
+                    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+                    <!-- TARGETS - Todos centrados y viendo a la cámara -->
+                    <a-entity mindar-image-target="targetIndex: 0"><a-gltf-model src="#modeloUSA" scale="0.4 0.4 0.4" position="0 0 0" rotation="0 0 0"></a-gltf-model></a-entity>
+                    <a-entity mindar-image-target="targetIndex: 1"><a-gltf-model src="#modeloUruguay" scale="0.4 0.4 0.4" position="0 0 0" rotation="0 0 0"></a-gltf-model></a-entity>
+                    <a-entity mindar-image-target="targetIndex: 2"><a-gltf-model src="#modeloMexico" scale="0.4 0.4 0.4" position="0 0 0" rotation="0 0 0"></a-gltf-model></a-entity>
+                    <a-entity mindar-image-target="targetIndex: 3"><a-gltf-model src="#modeloItalia" scale="0.4 0.4 0.4" position="0 0 0" rotation="0 0 0"></a-gltf-model></a-entity>
+                    <a-entity mindar-image-target="targetIndex: 4"><a-gltf-model src="#modeloFrancia" scale="0.4 0.4 0.4" position="0 0 0" rotation="0 0 0"></a-gltf-model></a-entity>
+                    <a-entity mindar-image-target="targetIndex: 5"><a-gltf-model src="#modeloEspana" scale="0.4 0.4 0.4" position="0 0 0" rotation="0 0 0"></a-gltf-model></a-entity>
+                    <a-entity mindar-image-target="targetIndex: 6"><a-gltf-model src="#modeloColombia" scale="0.4 0.4 0.4" position="0 0 0" rotation="0 0 0"></a-gltf-model></a-entity>
+                    <a-entity mindar-image-target="targetIndex: 7"><a-gltf-model src="#modeloCanada" scale="0.4 0.4 0.4" position="0 0 0" rotation="0 0 0"></a-gltf-model></a-entity>
+                    <a-entity mindar-image-target="targetIndex: 8"><a-gltf-model src="#modeloBrasil" scale="0.4 0.4 0.4" position="0 0 0" rotation="0 0 0"></a-gltf-model></a-entity>
+                    <a-entity mindar-image-target="targetIndex: 9"><a-gltf-model src="#modeloArgentina" scale="0.4 0.4 0.4" position="0 0 0" rotation="0 0 0"></a-gltf-model></a-entity>
+                    <a-entity mindar-image-target="targetIndex: 10"><a-gltf-model src="#modeloAlemania" scale="0.4 0.4 0.4" position="0 0 0" rotation="0 0 0"></a-gltf-model></a-entity>
+                </a-scene>
+            </div>
+        </section>
+
+        <section class="panel-controles">
+            <button class="ctrl" id="btnCamara" onclick="toggleCamara()">📷 APAGAR</button>
+            <button class="ctrl" onclick="window.location.href='estadisticas.html'">📊 ESTADISTICAS</button>
+            <button class="ctrl" onclick="window.location.href='trivias.html'">❓ TRIVIA</button>
+            
+            <button class="ctrl" id="btnReproducir" onclick="reproducir()">▶️ REPRODUCIR</button>
+            <button class="ctrl" id="btnCambiar" onclick="cambiar()">🔄 CAMBIAR</button>
+            
+            <button class="ctrl" onclick="abrirInfo()">❔ AYUDA</button>
+            <button class="ctrl" onclick="window.location.href='galeria.html'">🖼️ GALERIA</button>
+        </section>
+        
+        <a-entity mindar-image-target="targetIndex: 0">
+            <a-gltf-model src="#modeloUSA" scale="0.4 0.4 0.4" position="0 0 0" 
+                anim-rotar="active: false" 
+                anim-saltar="active: false">
+            </a-gltf-model>
+        </a-entity>
+    </main>
+
+    <!-- VENTANA DE AYUDA (CORREGIDA) -->
+    <div class="info-overlay" id="infoOverlay">
+        <div class="info-panel">
+            <h3>📌 AYUDA</h3>
+            <section class="info-section">
+                <h4>🎯 ¿Cómo se usa?</h4>
+                <p>1. Presiona el botón <b>CAMARA</b><br>2. Enfoca el escudo de una selección<br>3. El modelo 3D aparecerá automáticamente
+                <br>4. Descubre las animaciones del modelo 3D<br>5. Disfruta de Estadísticas,Trivia y Galería
+                </p>
+                <br>Proyecto universitario desarrollado por Kevin Bolaños Parra y Josué Rolando Carreón Guadián
+                <br>Video introductorio:
+            </section>
+            <button class="ctrl close-info" onclick="cerrarInfo()">CERRAR</button>
+        </div>
+    </div>
+
+    <script src="ra.js"></script>
+</body>
+</html>

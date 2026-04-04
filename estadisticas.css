@@ -1,0 +1,381 @@
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    position: relative;
+    background-image: url("img/cancha.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Overlay verde */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 97, 20, 0.55);
+    z-index: 0;
+}
+
+/* Panel principal */
+.panel {
+    width: min(1200px, 95%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: rgba(15, 23, 42, 0.9);
+    border: 3px solid #ff7a00;
+    border-radius: 18px;
+    backdrop-filter: blur(8px);
+    padding: clamp(15px, 3vw, 25px);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Scroll personalizado */
+.panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.panel::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.panel::-webkit-scrollbar-thumb {
+    background: #ff7a00;
+    border-radius: 10px;
+}
+
+/* Título */
+h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 6vw, 48px);
+    letter-spacing: 2px;
+    color: #ff7a00;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.instruccion {
+    color: #ccc;
+    margin-bottom: 20px;
+    font-style: italic;
+    font-size: clamp(14px, 2vw, 16px);
+}
+
+/* Contenido principal */
+.contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Grid de equipos */
+.equipos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border: 1px solid #ff7a00;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Scroll del grid */
+.equipos-grid::-webkit-scrollbar {
+    width: 6px;
+}
+
+.equipos-grid::-webkit-scrollbar-thumb {
+    background: #ff7a00;
+    border-radius: 6px;
+}
+
+/* Item de equipo */
+.equipo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(16, 82, 10, 0.5);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 12px 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.equipo-item:hover {
+    border-color: #ff7a00;
+    background: rgba(255, 122, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.equipo-item.seleccionado {
+    border-color: #ff7a00;
+    background: rgba(255, 122, 0, 0.3);
+    box-shadow: 0 0 15px #ff7a00;
+}
+
+.equipo-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+    transition: transform 0.2s;
+}
+
+.equipo-item:hover .equipo-logo {
+    transform: scale(1.1);
+}
+
+.equipo-nombre {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(16px, 2vw, 18px);
+    letter-spacing: 1px;
+    color: white;
+    text-align: center;
+}
+
+/* Detalle del equipo */
+.detalle-equipo {
+    background: rgba(16, 82, 10, 0.5);
+    border: 2px solid #ff7a00;
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 250px;
+}
+
+.detalle-header {
+    display: flex;
+    align-items: center;
+    gap: clamp(15px, 3vw, 25px);
+    border-bottom: 2px solid #ff7a00;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.detalle-logo {
+    width: clamp(60px, 10vw, 90px);
+    height: clamp(60px, 10vw, 90px);
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 8px;
+}
+
+.detalle-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(24px, 4vw, 36px);
+    color: #ff7a00;
+    letter-spacing: 2px;
+}
+
+/* Estadísticas */
+.detalle-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    text-align: left;
+}
+
+.stat-item {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px 15px;
+    border-radius: 8px;
+    border-left: 4px solid #ff7a00;
+    transition: transform 0.2s;
+}
+
+.stat-item:hover {
+    transform: translateX(5px);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.stat-label {
+    font-size: clamp(12px, 1.5vw, 14px);
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: clamp(18px, 2.5vw, 22px);
+    font-weight: bold;
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    word-break: break-word;
+}
+
+/* Botón volver */
+.btn-volver {
+    display: inline-block;
+    width: min(320px, 100%);
+    padding: 14px 20px;
+    margin: 15px auto 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(22px, 4vw, 28px);
+    letter-spacing: 2px;
+    color: white;
+    background: rgba(0, 0, 0, 0.65);
+    border: 2px solid #ff7a00;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-volver:hover {
+    background: #ff7a00;
+    color: black;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ff7a00, 0 0 30px rgba(255, 122, 0, 0.6);
+}
+
+.btn-volver:active {
+    transform: scale(0.98);
+}
+
+/* Responsive para tablets */
+@media (max-width: 768px) {
+    .panel {
+        max-height: 95vh;
+        padding: 15px;
+    }
+    
+    .equipos-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-height: 250px;
+    }
+    
+    .detalle-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .detalle-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+    body {
+        align-items: flex-start;
+        padding: 10px 0;
+    }
+    
+    .panel {
+        width: 100%;
+        max-height: 98vh;
+        border-radius: 12px;
+        padding: 12px;
+    }
+    
+    h1 {
+        font-size: 28px;
+    }
+    
+    .equipos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 10px;
+        max-height: 200px;
+    }
+    
+    .equipo-item {
+        padding: 8px 4px;
+    }
+    
+    .equipo-logo {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .equipo-nombre {
+        font-size: 14px;
+    }
+    
+    .detalle-equipo {
+        padding: 12px;
+        min-height: auto;
+    }
+    
+    .detalle-logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .detalle-header h2 {
+        font-size: 24px;
+    }
+    
+    .stat-item {
+        padding: 10px;
+    }
+    
+    .btn-volver {
+        padding: 12px;
+        font-size: 22px;
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 360px) {
+    .equipos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .equipo-item {
+        flex-direction: row;
+        gap: 10px;
+        padding: 8px 12px;
+    }
+    
+    .equipo-logo {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 0;
+    }
+}
+
+/* Orientación horizontal */
+@media (max-height: 600px) and (orientation: landscape) {
+    .panel {
+        max-height: 95vh;
+    }
+    
+    .equipos-grid {
+        max-height: 150px;
+    }
+    
+    .detalle-equipo {
+        min-height: auto;
+        padding: 10px;
+    }
+    
+    .detalle-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

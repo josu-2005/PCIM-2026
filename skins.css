@@ -1,0 +1,120 @@
+
+/*vista estatica*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("img/cancha.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 97, 20, 0.55);
+    z-index: -1;
+}
+
+.panel{
+    width: 900px;
+    max-width: 95%;
+    height: 720px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 3px solid #ff7a00;
+    border-radius: 18px;
+    backdrop-filter: blur(6px);
+    padding: 25px;
+}
+
+.contenido{
+    display: flex;
+    height: 80%;
+    gap: 20px;
+}
+
+.preview{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(16, 82, 10, 0.4);
+    border-radius: 12px;
+}
+
+.personaje{
+    width: 200px;
+    height: 300px;
+    background: gray;
+    border: 2px dashed white;
+}
+
+.opciones{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+button{
+    display: block;
+    width: 320px;
+    padding: 5px;
+    margin: 12px auto;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 2px;
+    color: white;
+    background: rgba(0, 0, 0, 0.55);
+    border: 2px solid #ff7a00;
+    cursor: pointer;
+    transition:  all 0.25s ease;
+    position: relative;
+}
+
+button:hover{
+    background: #ff7a00;
+    color: black;
+    transform: scale(1.08);
+    box-shadow: 0 0 10px #ff7a00
+                0 0 25px rgba(255, 122, 0, 0.8);
+}
+
+button:active{
+    transform: scale(0.98);
+}
+
+button:hover::before{
+    content: "▶";
+    position: absolute;
+    margin-left: -35px;
+}
+
+/*RESPONSIVO*/
+@media (max-width: 700px){
+
+    .panel{
+        height: auto;
+    }
+
+    .contenido{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .opciones{
+        width: 100%;
+    }
+}

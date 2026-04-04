@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Go For The Goal - Galería</title>
+
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="galeria.css">
+</head>
+<body class="gallery">
+    <main class="gallery-app">
+        <!-- Encabezado -->
+        <header class="gallery-header">
+            <h1>🎬 GALERÍA DE VIDEOS 🎬</h1>
+        </header>
+
+        <!-- Botón regresar -->
+        <nav class="gallery-nav">
+            <a href="ra.html" class="btn-back" aria-label="Volver a la página principal">
+                ⬅️ REGRESAR
+            </a>
+        </nav>
+
+        <!-- PANEL DE FILTROS -->
+        <div class="filtros-panel">
+            <div class="filtros-header">
+                <span>🎨 FILTROS DE VIDEO</span>
+                <button class="filtros-toggle" id="filtrosToggle" onclick="toggleFiltros()">▼</button>
+            </div>
+            <div class="filtros-contenido" id="filtrosContenido">
+                <div class="filtros-grid">
+                    <button class="filtro-btn" data-filter="blur" onclick="aplicarFiltroGlobal('blur')">
+                        <span class="filtro-icono">🌫️</span>
+                        <span>Desenfoque</span>
+                    </button>
+                    <button class="filtro-btn" data-filter="pixelate" onclick="aplicarFiltroGlobal('pixelate')">
+                        <span class="filtro-icono">🟦</span>
+                        <span>Pixelado</span>
+                    </button>
+                    <button class="filtro-btn" data-filter="thermal" onclick="aplicarFiltroGlobal('thermal')">
+                        <span class="filtro-icono">🔥</span>
+                        <span>Cámara térmica</span>
+                    </button>
+                    <button class="filtro-btn" data-filter="color-adjust" onclick="aplicarFiltroGlobal('color-adjust')">
+                        <span class="filtro-icono">🎨</span>
+                        <span>Ajuste de color</span>
+                    </button>
+                    <button class="filtro-btn" data-filter="smooth" onclick="aplicarFiltroGlobal('smooth')">
+                        <span class="filtro-icono">✨</span>
+                        <span>Suavizado</span>
+                    </button>
+                    <button class="filtro-btn" data-filter="pastel" onclick="aplicarFiltroGlobal('pastel')">
+                        <span class="filtro-icono">🌸</span>
+                        <span>Colores pasteles</span>
+                    </button>
+                    <button class="filtro-btn" data-filter="saturation" onclick="aplicarFiltroGlobal('saturation')">
+                        <span class="filtro-icono">💥</span>
+                        <span>Alta saturación</span>
+                    </button>
+                    <button class="filtro-btn active" data-filter="none" onclick="aplicarFiltroGlobal('none')">
+                        <span class="filtro-icono">⬜</span>
+                        <span>Sin filtro</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenedor de videos -->
+        <section class="video-grid">
+            <!-- Video 1 -->
+            <div class="video-card">
+                <video controls preload="metadata" poster="img/poster-copa.jpg" class="video-filtrable">
+                    <source src="vid/copamundial26.mp4" type="video/mp4">
+                    <source src="vid/copamundial26.webm" type="video/webm">
+                    Tu navegador no soporta la reproducción de videos.
+                </video>
+                <p>⚽ Copa Mundial FIFA 2026 - ¡Prepárate para la fiesta del fútbol!</p>
+            </div>
+
+            <!-- Video 2 -->
+            <div class="video-card">
+                <video controls preload="metadata" poster="img/poster-mexico.jpg" class="video-filtrable">
+                    <source src="vid/mexvsisl.mp4" type="video/mp4">
+                    <source src="vid/mexvsisl.webm" type="video/webm">
+                    Tu navegador no soporta la reproducción de videos.
+                </video>
+                <p>⚽ México vs Islandia - Resumen del partido</p>
+            </div>
+
+            <!-- Video 3 -->
+            <div class="video-card">
+                <video controls preload="metadata" poster="img/poster-mascotas.jpg" class="video-filtrable">
+                    <source src="vid/mascotasmundial.mp4" type="video/mp4">
+                    <source src="vid/mascotasmundial.mp4" type="video/webm">
+                    Tu navegador no soporta la reproducción de videos.
+                </video>
+                <p>⚽ Copa Mundial FIFA 2026 - ¡Conoce a las Mascotas de los países anfitriones!</p>
+            </div>
+
+            <!-- Video 4 -->
+            <div class="video-card">
+                <video controls preload="metadata" poster="img/poster-mexico.jpg" class="video-filtrable">
+                    <source src="vid/mexicomomentos.mp4" type="video/mp4">
+                    <source src="vid/mexicomomentos.mp4" type="video/webm">
+                    Tu navegador no soporta la reproducción de videos.
+                </video>
+                <p>⚽ ¡Mejores momentos de México en mundiales!</p>
+            </div>
+        </section>
+
+        <!-- Mensaje informativo -->
+        <footer class="gallery-footer">
+            <p>📢 Más videos disponibles próximamente | 🎨 Usa los filtros para personalizar la experiencia</p>
+        </footer>
+    </main>
+
+    <script src="galeria.js"></script>
+</body>
+</html>

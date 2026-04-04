@@ -1,0 +1,3 @@
+ token: 3AMXNbospIWQYiyUIWnVOgEw7D7_62kZXVivVDMKbDY94cjuN
+comando de powersheel: ngrok config add-authtoken $YOUR_AUTHTOKEN
+linkde navegador: https://laine-unengendered-keenly.ngrok-free.dev

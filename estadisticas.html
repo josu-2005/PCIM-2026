@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Go For The Goal - Estadísticas</title>
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="estadisticas.css">
+</head>
+<body>
+    <main class="panel">
+        <h1>ESTADÍSTICAS MUNDIAL 2026</h1>
+
+        <div class="instruccion">Selecciona un equipo para ver más detalles</div>
+
+        <section class="contenido">
+            <!-- Grid de equipos -->
+            <div class="equipos-grid" id="equipos-lista">
+                <!-- Los equipos se cargarán dinámicamente -->
+            </div>
+
+            <!-- Detalle del equipo -->
+            <div class="detalle-equipo" id="detalle-equipo">
+                <div class="detalle-header">
+                    <img src="img/placeholder.png" alt="" class="detalle-logo" id="detalle-logo">
+                    <h2 id="detalle-nombre">Selecciona un equipo</h2>
+                </div>
+                <div class="detalle-stats" id="detalle-stats">
+                    <p>Haz clic en cualquier equipo para ver sus estadísticas</p>
+                </div>
+            </div>
+
+            <!-- Botón volver -->
+            <a href="ra.html" class="btn-volver" aria-label="Volver a la página principal">⬅️ REGRESAR</a>
+        </section>
+    </main>
+
+    <script src="estadisticas.js"></script>
+</body>
+</html>

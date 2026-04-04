@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Go For The Goal - Trivia Mundial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="trivias.css">
+</head>
+<body>
+    <main class="panel">
+        <h1>⚽ TRIVIA MUNDIAL 2026 ⚽</h1>
+
+        <section class="contenido">
+            <!-- Cabecera con puntuación y progreso -->
+            <div class="trivia-header">
+                <div class="puntuacion">
+                    <div class="puntos">PUNTOS: <span id="score">0</span></div>
+                </div>
+                <div class="progreso" id="progreso">Pregunta 1 de 10</div>
+            </div>
+
+            <!-- Pregunta -->
+            <div class="pregunta" id="question">
+                Cargando pregunta...
+            </div>
+
+            <!-- Opciones -->
+            <div class="opciones" id="options"></div>
+
+            <!-- Feedback -->
+            <div class="feedback" id="feedback"></div>
+
+            <!-- Nota -->
+            <div class="footer-note">
+                <p>🏆 Responde correctamente y gana 10 puntos por pregunta 🏆</p>
+            </div>
+
+            <!-- Botones de navegación -->
+            <div class="botones-navegacion">
+                <a href="ra.html" class="btn-volver">⬅️ REGRESAR</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Resultados Finales -->
+    <div class="modal-resultado" id="modalResultado">
+        <div class="modal-contenido">
+            <h2>📊 RESULTADO FINAL</h2>
+            <div class="puntaje-final" id="puntajeFinal">0/100</div>
+            <div class="mensaje-final" id="mensajeFinal"></div>
+            <div class="botones-modal">
+                <button class="ctrl" onclick="reiniciarTrivia()">🔄 JUGAR DE NUEVO</button>
+                <a href="ra.html" class="ctrl">🏠 REGRESAR</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="trivias.js"></script>
+</body>
+</html>

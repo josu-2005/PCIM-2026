@@ -1,0 +1,390 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.gallery {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    background-image: url("img/cancha.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Overlay verde */
+body.gallery::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 97, 20, 0.55);
+    z-index: 0;
+}
+
+/* Estructura principal */
+.gallery-app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(12px, 3vw, 20px);
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.gallery-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.gallery-header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 3px;
+    font-size: clamp(32px, 8vw, 48px);
+    color: #ff7a00;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Navegación */
+.gallery-nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+/* Botón regresar - estilo consistente con otras páginas */
+.btn-back {
+    display: inline-block;
+    padding: 12px 25px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(18px, 4vw, 22px);
+    letter-spacing: 2px;
+    color: white;
+    background: rgba(0, 0, 0, 0.65);
+    border: 2px solid #ff7a00;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-back:hover {
+    background: #ff7a00;
+    color: black;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ff7a00, 0 0 30px rgba(255, 122, 0, 0.6);
+}
+
+.btn-back:active {
+    transform: scale(0.98);
+}
+
+/* Grid de videos - Responsive */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(15px, 3vw, 25px);
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Tarjeta de video */
+.video-card {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(255, 122, 0, 0.3);
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+}
+
+.video-card:hover {
+    border-color: #ff7a00;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 122, 0, 0.3);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* Video */
+.video-card video {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    background: black;
+    border: 1px solid #ff7a00;
+}
+
+/* Título del video */
+.video-card p {
+    font-size: clamp(14px, 3vw, 16px);
+    font-weight: 500;
+    line-height: 1.4;
+    color: white;
+    margin-top: 5px;
+    padding: 8px;
+    background: rgba(255, 122, 0, 0.2);
+    border-radius: 8px;
+    border-left: 3px solid #ff7a00;
+    text-align: center;
+}
+
+/* Estado cuando no hay videos */
+.video-grid:empty::after {
+    content: "No hay videos disponibles";
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+}
+
+/* Responsive para tablets */
+@media (max-width: 768px) {
+    .gallery-app {
+        padding: 15px;
+    }
+    
+    .video-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 15px;
+    }
+    
+    .video-card {
+        padding: 12px;
+    }
+    
+    .video-card p {
+        font-size: 14px;
+        padding: 6px;
+    }
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+    .gallery-header h1 {
+        font-size: 32px;
+    }
+    
+    .btn-back {
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+    
+    .video-grid {
+        grid-template-columns: 1fr; /* Una columna en móvil */
+        gap: 20px;
+    }
+    
+    .video-card {
+        padding: 10px;
+    }
+    
+    .video-card video {
+        aspect-ratio: 16/9;
+    }
+    
+    .video-card p {
+        font-size: 14px;
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 360px) {
+    .gallery-header h1 {
+        font-size: 28px;
+    }
+    
+    .btn-back {
+        padding: 8px 16px;
+        font-size: 16px;
+    }
+    
+    .video-card p {
+        font-size: 13px;
+    }
+}
+
+/* Orientación horizontal */
+@media (max-height: 500px) and (orientation: landscape) {
+    .gallery-app {
+        padding: 10px;
+    }
+    
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .gallery-header {
+        margin-bottom: 10px;
+    }
+    
+    .gallery-header h1 {
+        font-size: 28px;
+    }
+}
+
+/* Animación de carga */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.video-card {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.video-card:nth-child(1) { animation-delay: 0.1s; }
+.video-card:nth-child(2) { animation-delay: 0.2s; }
+.video-card:nth-child(3) { animation-delay: 0.3s; }
+.video-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* ===== PANEL DE FILTROS ===== */
+.filtros-panel {
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #ff7a00;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    backdrop-filter: blur(8px);
+    overflow: hidden;
+}
+
+.filtros-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: rgba(255, 122, 0, 0.2);
+    cursor: pointer;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #ff7a00;
+}
+
+.filtros-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.filtros-toggle:hover {
+    background: rgba(255, 122, 0, 0.3);
+}
+
+.filtros-contenido {
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+.filtros-contenido.collapsed {
+    display: none;
+}
+
+.filtros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+}
+
+.filtro-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 122, 0, 0.3);
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+}
+
+.filtro-btn:hover {
+    background: #ff7a00;
+    border-color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 122, 0, 0.4);
+}
+
+.filtro-btn.active {
+    background: #ff7a00;
+    border-color: white;
+    color: black;
+    box-shadow: 0 0 15px #ff7a00;
+}
+
+.filtro-icono {
+    font-size: 24px;
+}
+
+/* Ajustes responsivos para panel de filtros */
+@media (max-width: 600px) {
+    .filtros-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+    
+    .filtro-btn {
+        padding: 8px 4px;
+        font-size: 12px;
+    }
+    
+    .filtro-icono {
+        font-size: 20px;
+    }
+    
+    .filtros-header {
+        font-size: 18px;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .filtros-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Estilos para videos con filtros */
+.video-filtrable {
+    transition: filter 0.2s ease;
+}
+
+/* Footer */
+.gallery-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    border-top: 1px solid rgba(255, 122, 0, 0.3);
+}

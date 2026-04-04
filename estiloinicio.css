@@ -1,0 +1,175 @@
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    position: relative;
+}
+
+/* Fondo con imagen y overlay */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("img/cancha.jpg") center/cover no-repeat;
+    z-index: -2;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 97, 20, 0.55);
+    z-index: -1;
+}
+
+/* Contenedor principal */
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(20px, 5vh, 40px);
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Logo responsivo */
+.logo {
+    width: auto;
+    height: clamp(120px, 30vh, 350px);
+    max-width: 90vw;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Título de bienvenida */
+.bienvenida h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: clamp(24px, 5vw, 42px);
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+    padding: 0 10px;
+}
+
+/* Contenedor del botón */
+.acciones {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Botón de inicio */
+.btn-iniciar {
+    width: min(320px, 85vw);
+    padding: clamp(14px, 3vh, 18px) clamp(20px, 4vw, 30px);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(24px, 5vw, 32px);
+    letter-spacing: 2px;
+    color: white;
+    background: rgba(0, 0, 0, 0.65);
+    border: 2px solid #ff7a00;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Efectos hover */
+.btn-iniciar:hover {
+    background: #ff7a00;
+    color: black;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #ff7a00,
+                0 0 30px rgba(255, 122, 0, 0.6);
+    border-color: white;
+}
+
+.btn-iniciar:active {
+    transform: scale(0.98);
+}
+
+/* Responsive para tablets */
+@media (max-width: 768px) {
+    .menu {
+        gap: 25px;
+    }
+    
+    .bienvenida h2 {
+        font-size: clamp(22px, 4.5vw, 36px);
+    }
+    
+    .btn-iniciar {
+        font-size: clamp(22px, 4.5vw, 28px);
+    }
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+    .menu {
+        gap: 20px;
+        padding: 15px;
+    }
+    
+    .logo {
+        height: clamp(100px, 25vh, 200px);
+    }
+    
+    .bienvenida h2 {
+        font-size: clamp(20px, 6vw, 26px);
+        letter-spacing: 1px;
+    }
+    
+    .btn-iniciar {
+        padding: 14px 20px;
+        font-size: 22px;
+        border-width: 2px;
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 360px) {
+    .bienvenida h2 {
+        font-size: 20px;
+    }
+    
+    .btn-iniciar {
+        font-size: 20px;
+        padding: 12px 16px;
+    }
+}
+
+/* Orientación horizontal en móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+    .menu {
+        gap: 10px;
+    }
+    
+    .logo {
+        height: clamp(80px, 35vh, 150px);
+    }
+    
+    .bienvenida h2 {
+        font-size: clamp(18px, 4vh, 24px);
+    }
+    
+    .btn-iniciar {
+        padding: 8px 16px;
+        font-size: 20px;
+    }
+}
