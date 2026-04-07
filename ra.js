@@ -36,31 +36,82 @@ function toggleCamara() {
     }
 }
 
+// ===== VENTANA DE AYUDA =====
 function abrirInfo() {
     document.getElementById('infoOverlay').classList.add('active');
-    document.body.style.overflow = 'hidden'; // Evita scroll
+    document.body.style.overflow = 'hidden';
 }
 
 function cerrarInfo() {
-    document.getElementById('infoOverlay').classList.remove('active');
-    document.body.style.overflow = 'auto'; // Restaura scroll
+    const overlay = document.getElementById('infoOverlay');
+    if (overlay) {
+        overlay.classList.remove('active');
+    }
+    // Solo restaurar scroll si ninguna ventana está abierta
+    const tutorialAbierta = document.getElementById('tutorialOverlay')?.classList.contains('active');
+    if (!tutorialAbierta) {
+        document.body.style.overflow = 'auto';
+    }
 }
 
-function reproducir() {
-    alert('▶️ Enfoca un escudo para ver el modelo 3D');
+// ===== VENTANA DE TUTORIAL (NUEVA) =====
+function abrirTutorial() {
+    const tutorialOverlay = document.getElementById('tutorialOverlay');
+    const video = document.getElementById('tutorialVideo');
+    
+    if (tutorialOverlay) {
+        tutorialOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Intentar reproducir el video automáticamente
+        if (video) {
+            video.play().catch(e => console.log("Auto-reproducción bloqueada por el navegador:", e));
+        }
+    }
 }
 
-// Cerrar con tecla ESC
+function cerrarTutorial() {
+    const tutorialOverlay = document.getElementById('tutorialOverlay');
+    const video = document.getElementById('tutorialVideo');
+    
+    if (tutorialOverlay) {
+        tutorialOverlay.classList.remove('active');
+    }
+    
+    // Pausar el video al cerrar
+    if (video) {
+        video.pause();
+        video.currentTime = 0; // Reiniciar al principio (opcional)
+    }
+    
+    // Solo restaurar scroll si ninguna ventana está abierta
+    const ayudaAbierta = document.getElementById('infoOverlay')?.classList.contains('active');
+    if (!ayudaAbierta) {
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// ===== CIERRE CON TECLA ESC (MEJORADO) =====
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         cerrarInfo();
+        cerrarTutorial();
     }
 });
 
-// Inicialización
+// ===== INICIALIZACIÓN =====
 document.addEventListener('DOMContentLoaded', function() {
     console.log("🚀 Sistema AR listo");
+    
+    // Asegurar que las ventanas estén cerradas al inicio
+    const ayudaOverlay = document.getElementById('infoOverlay');
+    const tutorialOverlay = document.getElementById('tutorialOverlay');
+    if (ayudaOverlay) ayudaOverlay.classList.remove('active');
+    if (tutorialOverlay) tutorialOverlay.classList.remove('active');
+    document.body.style.overflow = 'auto';
 });
+
+// ===== COMPONENTES DE ANIMACIÓN =====
 // --- COMPONENTE 1: ROTAR ---
 AFRAME.registerComponent('anim-rotar', {
     schema: { active: { default: false } },
@@ -74,7 +125,10 @@ AFRAME.registerComponent('anim-rotar', {
 // --- COMPONENTE 2: SALTAR ---
 AFRAME.registerComponent('anim-saltar', {
     schema: { active: { default: false } },
-    init: function() { this.initialY = this.el.object3D.position.y; this.time = 0; },
+    init: function() { 
+        this.initialY = this.el.object3D.position.y; 
+        this.time = 0; 
+    },
     tick: function (time, timeDelta) {
         if (this.data.active) {
             this.time += timeDelta * 0.005;
@@ -85,10 +139,12 @@ AFRAME.registerComponent('anim-saltar', {
     }
 });
 
-// --- LÓGICA DE CONTROL ---
+// ===== LÓGICA DE CONTROL DE ANIMACIONES =====
 let animando = false;
 let modoActual = 'rotar'; // Empieza en rotar por defecto
 
+// NOTA: Esta función REPRODUCIR SOBRESCRIBE la de arriba (la del alert)
+// Si quieres mantener el alert, cambia el nombre de esta función
 function reproducir() {
     const btn = document.getElementById('btnReproducir');
     const modelos = document.querySelectorAll('a-gltf-model');

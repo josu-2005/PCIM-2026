@@ -80,6 +80,7 @@
             <button class="ctrl" id="btnCambiar" onclick="cambiar()">🔄 CAMBIAR</button>
             
             <button class="ctrl" onclick="abrirInfo()">❔ AYUDA</button>
+            <button class="ctrl" onclick="abrirTutorial()">🎬 TUTORIAL</button>
             <button class="ctrl" onclick="window.location.href='galeria.html'">🖼️ GALERIA</button>
         </section>
         
@@ -91,19 +92,35 @@
         </a-entity>
     </main>
 
-    <!-- VENTANA DE AYUDA (CORREGIDA) -->
+    <!-- VENTANA DE AYUDA (SIN VIDEO) -->
     <div class="info-overlay" id="infoOverlay">
         <div class="info-panel">
             <h3>📌 AYUDA</h3>
             <section class="info-section">
                 <h4>🎯 ¿Cómo se usa?</h4>
-                <p>1. Presiona el botón <b>CAMARA</b><br>2. Enfoca el escudo de una selección<br>3. El modelo 3D aparecerá automáticamente
-                <br>4. Descubre las animaciones del modelo 3D<br>5. Disfruta de Estadísticas,Trivia y Galería
+                <p>1. Presiona el botón <b>CÁMARA</b><br>2. Enfoca el escudo de una selección<br>3. El modelo 3D aparecerá automáticamente
+                <br>4. Descubre las animaciones del modelo 3D<br>5. Disfruta de Estadísticas, Trivia y Galería
                 </p>
-                <br>Proyecto universitario desarrollado por Kevin Bolaños Parra y Josué Rolando Carreón Guadián
-                <br>Video introductorio:
+                <br><strong>Proyecto universitario desarrollado por:</strong><br>Kevin Bolaños Parra y Josué Rolando Carreón Guadián
             </section>
             <button class="ctrl close-info" onclick="cerrarInfo()">CERRAR</button>
+        </div>
+    </div>
+
+    <!-- VENTANA DE TUTORIAL (SOLO VIDEO) -->
+    <div class="info-overlay" id="tutorialOverlay">
+        <div class="info-panel tutorial-panel">
+            <h3>🎬 VIDEO TUTORIAL</h3>
+            <section class="info-section">
+                <p>Aprende a usar la aplicación con este video:</p>
+                <div class="video-container">
+                    <video id="tutorialVideo" controls preload="metadata">
+                        <source src="vid/tutorialARCOMP.mp4" type="video/mp4">
+                        Tu navegador no soporta la etiqueta de video.
+                    </video>
+                </div>
+            </section>
+            <button class="ctrl close-info" onclick="cerrarTutorial()">CERRAR</button>
         </div>
     </div>
 

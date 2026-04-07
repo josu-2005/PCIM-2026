@@ -15,14 +15,14 @@ body.game {
     background-repeat: no-repeat;
 }
 
-/* FILTRO VERDE - AHORA NO AFECTA LA CÁMARA */
+/* FILTRO VERDE - NO AFECTA LA CÁMARA */
 body.game::before {
     content: "";
     position: fixed;
     inset: 0;
     background: rgba(13, 97, 20, 0.55);
     z-index: -1;
-    pointer-events: none; /* ← NUEVO: Evita que interfiera con la cámara */
+    pointer-events: none;
 }
 
 .app {
@@ -116,7 +116,6 @@ body.game::before {
     top: 0;
     left: 0;
     z-index: 15;
-    /* AISLAR del filtro verde */
     filter: none !important;
     background: transparent !important;
 }
@@ -141,7 +140,7 @@ body.game::before {
     display: none !important;
 }
 
-/* ===== NUEVO: FORZAR QUE LA CÁMARA NO TENGA FILTROS ===== */
+/* FORZAR QUE LA CÁMARA NO TENGA FILTROS */
 video, canvas, .a-canvas, .a-scene * {
     filter: none !important;
     backdrop-filter: none !important;
@@ -202,6 +201,13 @@ video, canvas, .a-canvas, .a-scene * {
     z-index: 25;
 }
 
+/* Ajuste para 7 botones (ahora hay TUTORIAL) */
+@media (min-width: 769px) {
+    .panel-controles {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
 .ctrl {
     padding: 14px 6px;
     font-family: 'Bebas Neue', sans-serif;
@@ -228,12 +234,16 @@ video, canvas, .a-canvas, .a-scene * {
     border-color: white;
 }
 
-/* ===== INFO OVERLAY ===== */
+#btnCambiar {
+    transition: opacity 0.3s ease, transform 0.25s;
+}
+
+/* ===== VENTANAS MODALES (AYUDA Y TUTORIAL) ===== */
 .info-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, .45);
-    backdrop-filter: blur(3px);
+    background: rgba(0, 0, 0, .75);
+    backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -249,20 +259,73 @@ video, canvas, .a-canvas, .a-scene * {
 }
 
 .info-panel {
-    width: min(420px, 92%);
+    background: rgba(0, 0, 0, .85);
+    border: 3px solid #ff7a00;
+    border-radius: 20px;
+    padding: 24px 20px;
+    width: min(450px, 92%);
     max-height: 85vh;
     overflow-y: auto;
+    color: white;
+    box-shadow: 0 0 30px rgba(255, 122, 0, .3);
 }
 
-.marcador-ejemplo {
-    margin-top: 15px;
+.info-panel h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ff7a00;
+}
+
+.info-panel h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #ffaa44;
+}
+
+.info-panel p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.info-panel .close-info {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    background: #ff7a00;
+    color: black;
+}
+
+.info-panel .close-info:hover {
+    background: white;
+    transform: scale(1.02);
+}
+
+/* ===== VENTANA DE TUTORIAL (SOLO VIDEO) ===== */
+.tutorial-panel {
     text-align: center;
 }
 
-.marcador-ejemplo img {
-    max-width: 200px;
-    border: 2px solid #ff7a00;
-    border-radius: 10px;
+.tutorial-panel p {
+    margin-bottom: 15px;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+/* Contenedor del video */
+.video-container {
+    margin: 15px 0;
+    width: 100%;
+}
+
+.video-container video {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    background: #000;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -273,8 +336,31 @@ video, canvas, .a-canvas, .a-scene * {
     }
     
     .ctrl {
+        font-size: 13px;
+        padding: 10px 2px;
+    }
+    
+    .info-panel {
+        padding: 18px 15px;
+    }
+    
+    .info-panel h3 {
+        font-size: 26px;
+    }
+    
+    .video-container video {
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ctrl {
+        font-size: 11px;
+        padding: 8px 2px;
+    }
+    
+    .info-panel p {
         font-size: 14px;
-        padding: 12px 2px;
     }
 }
 
@@ -282,9 +368,5 @@ video, canvas, .a-canvas, .a-scene * {
 .camara-placeholder * {
     position: relative;
     z-index: 30;
-    isolation: isolate; /* Aísla del contexto del filtro */
-}
-
-#btnCambiar {
-    transition: opacity 0.3s ease, transform 0.25s;
+    isolation: isolate;
 }
